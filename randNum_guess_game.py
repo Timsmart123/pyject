@@ -1,44 +1,29 @@
-Random Guessing Python Game
-
-# Random Number guessing game
-
-# Create a random number between 1 - 100
 import random
 
-randNum = random.randint(1,100)
+r = random.randint(1, 100)
+s = 0
+g = 0
 
-score = 0
+def c(i,a):
+ if i<1 or i>100:
+  print("??? that is not even in range bro")
+ elif i<a:
+      print("go UP maybe idk")
+ elif i>a:
+   print("nah lower lower")
+ else:
+    print("ok u got it i guess")
+    print("tries:",s)
+    raise SystemExit
 
-guess = 0
-# receive user input guess
-    
-# if correct winner and print statement
-def ansCheck(inp, ans):
-  if (inp < 1 or inp > 100) :
-    print('Not valid')
-  elif ans > inp :
-    print('Higher')
-  elif ans < inp:
-    print('Lower')
-  else:
-      print('Correct')
-      print(f"Guesses : {score}")
-      raise SystemExit
-      
-# if higher or lower retry
-    
-
-while guess != randNum:
-  
-  valid = False
-  while not valid:
-      try:
-         guess = int(input('Enter a guess number from 1 - 100 : '))
-         ansCheck(guess, randNum)
-         score += 1  # record number of tries
-         if guess == int:
-             valid = True
-             guess = int(input('Enter a guess number from 1 - 100 : '))
-      except ValueError:
-             print("Not Valid")
+while g != r:
+ bad = False
+ while bad == False:
+  try:
+    g = int(input("type num 1-100 now: "))
+    c(g,r)
+    s=s+1
+    bad=True
+  except:
+    print("not a number lol")
     
