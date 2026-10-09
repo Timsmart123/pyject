@@ -1,0 +1,157 @@
+dog_size = ["Small", "Medium", "Large"]
+
+dog_active = ["Not Active", "Active", "Very Active"]
+
+VACCINATION = 70.00
+
+def get_dog_size(dog_size):
+    
+    options = dog_size
+
+    flag = True
+
+    while flag:
+        print("What is size of your dog?")
+        print("#### Select an option ####")
+        print("## 1. Small")
+        print("## 2. Medium")
+        print("## 3. Large")
+
+        choice = input ("Enter your choice here: ")
+        
+        try:
+            int(choice)
+        except:
+            print("Sorry, you did not enter a valid choice")
+            flag = True
+        else:
+            choice = int(choice)
+            if choice < 1 or choice > 3:
+                print("Choice must be between 1 and 3")
+                flag = True
+            else:
+                flag = False
+
+    size = options[choice - 1]
+
+    return size
+
+def get_dog_active(dog_active):
+    
+    options = dog_active
+
+    flag = True
+
+    while flag:
+        print("How active will the dog be?")
+        print("#### Select an option ####")
+        print("## 1. Not Active")
+        print("## 2. Active")
+        print("## 3. Very Active")
+
+        choice = input ("Enter your choice here: ")
+        
+        try:
+            int(choice)
+        except:
+            print("Sorry, you did not enter a valid choice")
+            flag = True
+        else:
+            choice = int(choice)
+            if choice < 1 or choice > 3:
+                print("Choice must be between 1 and 3")
+                flag = True
+            else:
+                flag = False
+
+    active = options[choice-1]
+
+    return active
+
+def get_type_food ():
+    flag = True
+
+    while flag:
+    
+        food = input("What type of food will you use? \nWet or dry?: ")
+
+        food = food.lower()
+
+        if food == "wet" or food == "dry":
+            flag = False
+        else:
+            print('Not Valid Try again')
+            flag = True
+    
+    return food
+
+def get_food_qty(food):
+    if food == "dry":
+        qty = [180, 350, 520]
+    else:
+        qty = [400, 800, 1200]
+
+    return qty
+
+
+
+
+def calculate_daily_food_costs(size,  food, food_qty, active):
+    # Logic error
+    
+    if food == "dry":
+        per_100g = 0.30
+    else:
+        per_100g =  0.40
+
+    if size == "Small":
+        qty = food_qty[0]
+    elif size == "Medium":
+        qty = food_qty[1]
+        
+    else:
+        qty = food_qty[2]
+
+    base_cost = (per_100g * qty) / 100
+
+    if active == "Not Active":
+        daily_cost = base_cost -  (base_cost * 0.9)
+    elif active == "Very Active":
+        daily_cost = base_cost +  (base_cost * 1.15)
+    else:
+        daily_cost = base_cost
+
+    return daily_cost
+
+def calculate_final_costs(daily_cost, vax):
+    
+    est_yearly_food = daily_cost * 365
+    est_monthly_food = est_yearly_food / 12
+
+    total_inc_vax = est_yearly_food + vax
+
+    print("It is estimated that food for this dog will cost £{:.2f} per day ".format(daily_cost))
+    
+    print("It is estimated that food for this dog will cost £{:.2f} per month ".format(est_monthly_food))
+
+    print("It is estimated that food for this dog will cost £{:.2f} per year ".format(est_yearly_food))
+
+    print("It is estimated that total cost for this dog (inlcuding vaccination) will be £{} per year ".format(total_inc_vax))
+
+    
+  
+
+size = get_dog_size(dog_size)
+active = get_dog_active(dog_active)
+food = get_type_food()
+food_qty = get_food_qty(food)
+# Print Dogs details
+print('Dog size: {}'.format(size))
+print('Dog Activeness: {}'.format(active))
+print('Dog food type: {}'.format(food))
+# print('Dog food quality: {}'.format(food_qty))
+
+daily_cost = calculate_daily_food_costs(size,  food, food_qty, active)
+final_costs = calculate_final_costs(daily_cost, VACCINATION)
+
+
